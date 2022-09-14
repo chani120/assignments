@@ -1,15 +1,21 @@
 #include <stdlib.h> //includes rand() function
 #include <stdio.h> //includes printf
-
-void cypher(char input, int shift){
-  input 
-}
-
+#include <string.h>
 
 int main() {
-  char word[];
-  int x;
-  cypher(word,x);
-  printf("Your cypher is:",%s,word);
+  char word[10];
+  int shift;
+  
+  printf("Please enter a word: ");
+  scanf("%s", word);
+  printf("Please enter a shift: ");
+  scanf(" %d", &shift);
+
+  for (int i=0; i<strlen(word); i++){
+      int ascii = word[i]+shift;
+      word[i] = ascii;
+  }
+
+  printf("Your cypher is: %s ",word );
   return 0;
 }
