@@ -6,7 +6,8 @@
 int main() {
   srand(time(0));
   const char* word = chooseWord();
-  printf("cheat: %s\n", word);
+
+  //printf("cheat: %s\n", word);
 
   return 0;
 }
