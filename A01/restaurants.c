@@ -66,7 +66,6 @@ scanf(" %d", &option );
     }
   }
 
-
   else if (option == 2){
     if (current_time>=restaurant3.opening_hour && current_time<restaurant3.closing_hour){  
       printf("Outback Steakhouse is an excellent choice! It will be open for %d more hours", abs(restaurant3.closing_hour-current_time));
