@@ -1,5 +1,5 @@
-#include <stdlib.h> //includes rand() function
-#include <stdio.h> //includes printf
+#include <stdlib.h> 
+#include <stdio.h> 
 #include <string.h>
 
 int main() {

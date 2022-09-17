@@ -9,7 +9,7 @@ int closing_hour;
 float rating;
 };
 
-int main() {
+int main(){
 struct restaurant restaurant1, restaurant2, restaurant3;
 
 strcpy(restaurant1.name, "Red Lobster");  
@@ -44,37 +44,37 @@ scanf(" %d", &option );
 
   if (option == 0){
     if (current_time>=restaurant1.opening_hour && current_time<restaurant1.closing_hour){  
-      printf("Red Lobster is an excellent choice! It will be open for %d more hours", abs(restaurant1.closing_hour-current_time));
+      printf("Red Lobster is an excellent choice! It will be open for %d more hours ", abs(restaurant1.closing_hour-current_time));
     }
     else if (current_time<restaurant1.opening_hour){
-      printf("Red Lobster is not open until %d:00", restaurant1.opening_hour);
+      printf("Red Lobster is not open until %d:00 ", restaurant1.opening_hour);
     }
     else if (current_time>restaurant1.closing_hour){
-      printf("Red Lobster closed at %d:))", restaurant1.closing_hour);
+      printf("Red Lobster closed at %d:00 ", restaurant1.closing_hour);
     }
   }
 
   else if (option == 1){
     if (current_time>=restaurant2.opening_hour && current_time<restaurant2.closing_hour){  
-      printf("Olive Garden is an excellent choice! It will be open for %d more hours", abs(restaurant2.closing_hour-current_time));
+      printf("Olive Garden is an excellent choice! It will be open for %d more hours ", abs(restaurant2.closing_hour-current_time));
     }
     else if (current_time<restaurant2.opening_hour){
-      printf("Olive Garden is not open until %d:00", restaurant2.opening_hour);
+      printf("Olive Garden is not open until %d:00 ", restaurant2.opening_hour);
     }
     else if (current_time>restaurant2.closing_hour){
-      printf("Olive Garden closed at %d:00", restaurant2.closing_hour);
+      printf("Olive Garden closed at %d:00 ", restaurant2.closing_hour);
     }
   }
 
   else if (option == 2){
     if (current_time>=restaurant3.opening_hour && current_time<restaurant3.closing_hour){  
-      printf("Outback Steakhouse is an excellent choice! It will be open for %d more hours", abs(restaurant3.closing_hour-current_time));
+      printf("Outback Steakhouse is an excellent choice! It will be open for %d more hours ", abs(restaurant3.closing_hour-current_time));
     }
     else if (current_time<restaurant3.opening_hour){
-      printf("Outback Steakhouse is not open until %d:00", restaurant3.opening_hour);
+      printf("Outback Steakhouse is not open until %d:00 ", restaurant3.opening_hour);
     }
     else if (current_time>restaurant3.closing_hour){
-      printf("Outback Steakhouse closed at %d:00", restaurant3.closing_hour);
+      printf("Outback Steakhouse closed at %d:00 ", restaurant3.closing_hour);
     }  
   }
 
