@@ -1,29 +1,22 @@
-#include <stdio.h>
-
+#include <stdlib.h> 
+#include <stdio.h> 
+#include <string.h>
 
 int main(){
   int matrix[4][4];
-  int val;
+  int value;
   for(int i =0; i<4; i++){
     for(int j = 0; j<4; j++){
-      scanf("%d",&val);
-      matrix[i][j] = val;
+      scanf("%d",&value);
+      matrix[i][j] = value;
     }
   }
 
   int shift[16];
   int index = 0;
 
-  //char left[] = 'left';
-  //char right[] = 'right';
-  //char up[] = 'up';
-  //char down[] = 'down';
-  int move;
 
-  printf("Please enter move");
-  scanf("%d", &move);
-
-  if (move == 1){  
+//shift left
     for(int i = 0; i<=3; i++){
       for(int j = 3; j<=1; j--){
 
@@ -45,36 +38,30 @@ int main(){
         }
       }
     }
-  }
-
-  else if (move == 2){  
+  
+//shift right
     for(int i = 0; i<=3; i++){
       for(int j = 0; j<=2; j++){
         if (matrix[i][j] == matrix[i][j+1]){
           shift[index] = matrix[i][j] + matrix[i][j+1];
-          printf("%d\n",shift[index]);
           index = index + 1;
         }
         else if (matrix[i][0]== matrix[i][3] && matrix[i][1] == 0 && matrix[i][2] == 0){
           shift[index] = matrix[i][0] + matrix[i][3];
-          printf("%d\n",shift[index]);
           index = index + 1;
         }
         else if (matrix[i][0]== matrix[i][2] && matrix[i][1] == 0){
           shift[index] = matrix[i][0] + matrix[i][2];
-          printf("%d\n",shift[index]);
           index = index + 1;
         }
         else if (matrix[i][1]== matrix[i][3] && matrix[i][2] == 0){
           shift[index] = matrix[i][1] + matrix[i][3];
-          printf("%d\n",shift[index]);
           index = index + 1;
         }
       }
     }
-  }
-
-  else if (move == 3){  
+  
+//shift up
     for(int i = 3; i>=1; i--){
       for(int j = 0; j<=3; j++){
         if (matrix[0][j]== matrix[2][j] && matrix[1][j] == 0){
@@ -95,9 +82,8 @@ int main(){
         }
       }
     }
-  }
 
-  else if (move == 4){  
+//shift down
     for(int i = 0; i<=2; i++){
       for(int j = 0; j<=3; j++){
         if (matrix[i][j] == matrix[i+1][j]){
@@ -118,31 +104,27 @@ int main(){
         }
       }
     }
-  }
   
-  //printf("%d 1: ,%d 2: ,%d 3: ,%d 4: ",shift[0],shift[1],shift[2],shift[3]);
 
   int largest = 0;
   for (int i = 0; i<index; i++){
     if (shift[i] > largest){
       largest = shift[i];
-      printf("%d/n",shift[i]);
     }
   }
 
-  if (largest == 0){
+  if(largest == 0){
     for(int i = 0; i<4; i++){
       for(int j = 0; j<4; j++){
-        if(matrix[i][j]> largest){
+        if(matrix[i][j] > largest){
           largest = matrix[i][j];
         }
       }
     }
   }
-
- printf("The largest value is %d", largest);
   
-
+ printf("The largest value is %d ", largest);
+  
   return 0;
 }
 
