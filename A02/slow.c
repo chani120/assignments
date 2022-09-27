@@ -26,7 +26,7 @@ int main() {
     x = x + length + 1;
     
   }
-
+  ent[x] = '\0';
   printf(" %s ", ent);
   free(ent);
   return 0;
