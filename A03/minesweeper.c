@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <time.h>
 
 int main(int argc, char *argv[]) {
@@ -12,7 +11,6 @@ int main(int argc, char *argv[]) {
   float p;
   p = atof(argv[3]);
   int *board = malloc(m*n*sizeof(int));
-
   printf("Board:\n");
 
   srand(time(0));
@@ -30,7 +28,6 @@ int main(int argc, char *argv[]) {
     }   
     printf("\n");     
   }
-  
 
   int *neighbors = malloc(m*n*sizeof(int));
   for(int i = 0; i<m; i++){
@@ -121,7 +118,6 @@ char add = '1';
     }
   }
 
-
 //check bombs
  for(int i = 0; i<m; i++){
     for(int j = 0; j<n; j++){
@@ -131,7 +127,6 @@ char add = '1';
    }
  }
   
- 
   printf("\nNeighbors:\n");
 
   for(int i = 0; i<m; i++){
@@ -143,7 +138,7 @@ char add = '1';
 
   free(board);
   free(neighbors);
-  
+
 }
 
 
