@@ -1,3 +1,5 @@
+//chandini ragobar and abigail marmer-adams
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -24,7 +26,23 @@ struct flavor* makeFlavor(const char* name, float cals) {
   return c;
 }
 
-void computeCalories(struct cupcake* cakes, int n) {
+void printCalories(struct cupcake* cakes, int n) {
+  int total =0;
+  int frosting = 0;
+  int cake = 0;
+  int most =0;
+  struct cupcake highcal;
+  for(int i = 0; i <n; i++){
+      frosting = cakes[i].frosting->calories;
+      cake = cakes[i].cake->calories;
+      total = frosting + cake;
+      if(total > most){
+        most = total;
+        highcal = cakes[i];
+      }
+      printf("Cupcake %d) %s with %s frosting (calores: %d)", i, cakes[i].cake->name, cakes[i].frosting->name, total);
+  }
+  printf("the cupcake with the most calories is: %s cake with %s frosting", highcal.cake->name, highcal.frosting->name);
 }
 
 int main() {
@@ -41,5 +59,9 @@ int main() {
   cakes[2].cake = creamcheese;
   cakes[2].frosting = strawberry; 
 
-  computeCalories(cakes, 3);
+  printCalories(cakes, 3);
+  free(redVelvet);
+  free(chocolate);
+  free(strawberry);
+  free(creamcheese);
 }
