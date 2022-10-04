@@ -35,13 +35,13 @@ void func(restaurants *q)
 }
 
 int main(){
-  int nres;
+  int num_res;
   printf("How many restuaraunts?\n");
-  scanf("%d",nres);
+  scanf("%d",num_res);
   restaurants *q = malloc(sizeof(restaurants));
   node* h=NULL;
-  h=list(nres);
-  for(int i=1; i<=nres; i++){
+  h=list(num_res);
+  for(int i=1; i<=num_res; i++){
     printf("Whats the name of the restaurant?\n");
     q->name[64]= scanf("%s",restaurants.name);
     printf("How well liked is this restaurant?(rating)\n");
