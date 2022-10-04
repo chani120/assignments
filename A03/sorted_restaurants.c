@@ -2,56 +2,60 @@
 #include <stdlib.h>
 
 
-/* Structure to pass multiple values onto stack */
-typedef struct restaurants{
+struct restaurants{
     char name[64];
     int opening_hour;
     int closing_hour;
     float rating;
-}restaurants;
+};
 
- typedef struct node {
-    struct restaurants data;           /*  --> Changes done here */
-    struct node *pNext; /* Reference to the next node address */
-} NODE;
-
-/*Structure declares pointers for front and back of the list*/
-typedef struct LIST {
-    NODE *front;
-    NODE *back;
-} LIST;
+struct node {
+    struct restaurants res_list;
+    struct restaurants data;           
+    struct node *next;
+} ;
 
 
-void func(restaurants *q)
+struct node* insert_front(struct restaurants res_list, struct node* head){
+    struct node* n = malloc(sizeof(struct node));
+    if(n == NULL){
+        printf("ERROR:OUt of space!\n");
+        exit(1);
+    }
+    n->res_list = res_list;
+    n->next = head;
+    return n;
+};
+
+
+void print(struct node*list)
 {
-    NODE *p = malloc(sizeof(NODE));
-    p->data.name[] = q->name[];
-    p->data.opening_hour = q->opening_hour;
-    p->data.closing_hour = q->closing_hour;
-    p->data.rating = q->rating;
-
-    printf("%s %d %d %g",p->data.name,p->data.opening_hour,p->data.closing_hour, p->data.rating);
-    free(p);
+   for(struct node* n = list; n!=NULL; n=n->next){
+    printf("%s open: %d:00 close: %d:00 stars: %g\n",
+    n->res_list.name, n->res_list.opening_hour, n->res_list.closing_hour, n->res_list.rating);
+   }
 }
 
-int main(){
-  int num_res;
-  printf("How many restuaraunts?\n");
-  scanf("%d",num_res);
-  restaurants *q = malloc(sizeof(restaurants));
-  node* h=NULL;
-  h=list(num_res);
-  for(int i=1; i<=num_res; i++){
+struct data{
     printf("Whats the name of the restaurant?\n");
-    q->name[64]= scanf("%s",restaurants.name);
+    scanf("%s", restaurants.name);
     printf("How well liked is this restaurant?(rating)\n");
-    q->rating = scanf("%g",rating);
+    scanf("%g", restaurants.rating);
     printf("When does the restaurant open?\n");
-    q->opening_hour = scanf("%d",restaurants.opening_hour);
+    scanf("%d", restaurants.opening_hour);
     printf("When does the restaurant close?\n");
-    q->closing_hour = scanf("%d",restaurants.closing_hour);
-    func(q);
+    scanf("%d",restaurants.closing_hour);
+};
+
+int main(){
+    struct node* head = NULL;
+    int num_res;
+    printf("How many restuaraunts?\n");
+    scanf("%d",&num_res);
+    struct restaurants data;
+    for(int i=0; i<=num_res; i++){
+    head = insert_front(data,head);
     }
-    free(p);
+    printf(head);
     return 0;
  }
