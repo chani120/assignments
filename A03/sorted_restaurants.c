@@ -53,24 +53,22 @@ int main(){
     scanf("%d",&data[i].closing_hour);
     }
     
-    float arr[num_res];
-
+    float arr[20];
+ 
     for(int i=0; i < num_res; i++){
         arr[i]= data[i].rating;
     }
-
- 
+    
     int temp = 0;
     for(int i=0; i < num_res; i++){
-        for(int j= 1; j < num_res; j++){
-            if (arr[i] < arr[j]){
+        for(int j = i+1; j < num_res; j++){
+            if (arr[i] > arr[j]){
                 temp = arr[i];       
                 arr[i] = arr[j];     
                 arr[j] = temp;
             }    
         }   
     }
-    printf("%g",arr);
     
     for(int i=0; i < num_res; i++){
         for(int j= 0; j < num_res; j++){
@@ -82,5 +80,16 @@ int main(){
 
 
     print(head);
+    struct node* current;//from sep 13 slides
+    struct node* to_delete;
+    current = head;
+    to_delete = head;
+    while(current!=NULL){
+        current=current->next;
+        free(to_delete);
+        to_delete=current;
+    }
+    
+    free(data);
     return 0;
  }
