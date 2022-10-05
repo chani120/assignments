@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 int main(int argc, char *argv[]) {
@@ -11,6 +12,7 @@ int main(int argc, char *argv[]) {
   float p;
   p = atof(argv[3]);
   int *board = malloc(m*n*sizeof(int));
+
   printf("Board:\n");
 
   srand(time(0));
@@ -26,9 +28,9 @@ int main(int argc, char *argv[]) {
       }
       printf("%c",board[i*n + j]);
     }   
-    printf("\n");     
+   printf("\n");     
   }
-
+  
   int *neighbors = malloc(m*n*sizeof(int));
   for(int i = 0; i<m; i++){
     for(int j = 0; j<n; j++){
@@ -36,29 +38,29 @@ int main(int argc, char *argv[]) {
     } 
   }
   
-char add = '1';
+  char add = '1';
 
-//check below
+  //check below
   for(int i = 0; i<m-1; i++){
     for(int j = 0; j<n; j++){
-      if (board[(i*n +1) + j] == 'X'){    
+      if (board[(i+1)*n + j] == 'X'){    
         neighbors[i*n + j] = (int)(neighbors[i*n + j]-'0') + (int)(add-'0'); 
         neighbors[i*n + j] = neighbors[i*n + j] +'0';
       }  
     }
   }
 
-//check above
+  //check above
   for(int i = 1; i<m; i++){
     for(int j = 0; j<n; j++){
-      if (board[(i*n -1) + j] == 'X'){    
+      if (board[(i-1)*n + j] == 'X'){    
         neighbors[i*n + j] = (int)(neighbors[i*n + j]-'0') + (int)(add-'0'); 
         neighbors[i*n + j] = neighbors[i*n + j] +'0';
       }  
     }
   }
 
-//check left
+  //check left
   for(int i = 0; i<m; i++){
     for(int j = 1; j<n; j++){     
       if (board[i*n + (j-1)] == 'X'){    
@@ -68,7 +70,7 @@ char add = '1';
     }
   }
 
-//check right
+  //check right
   for(int i = 0; i<m; i++){
     for(int j = 0; j<n-1; j++){
       if (board[i*n + (j+1)] == 'X'){    
@@ -78,55 +80,55 @@ char add = '1';
     }
   }
 
-//check NW
+  //check NW
   for(int i = 1; i<m; i++){
     for(int j = 1; j<n; j++){
-      if (board[(i*n -1)+ (j-1)] == 'X'){    
+      if (board[(i-1)*n + (j-1)] == 'X'){    
         neighbors[i*n + j] = (int)(neighbors[i*n + j]-'0') + (int)(add-'0');
         neighbors[i*n + j] = neighbors[i*n + j] +'0';
       }  
     }
   }
 
-//check NE
-  for(int i = 0; i<m-1; i++){
-    for(int j = 1; j<n; j++){
-      if (board[(i*n +1) + (j-1)] == 'X'){    
-        neighbors[i*n + j] = (int)(neighbors[i*n + j]-'0') + (int)(add-'0');
-        neighbors[i*n + j] = neighbors[i*n + j] +'0';
-      }  
-    }
-  }
-
-//check SW
+  //check NE
   for(int i = 1; i<m; i++){
     for(int j = 0; j<n-1; j++){
-      if (board[(i*n -1) + (j+1)] == 'X'){    
+      if (board[(i-1)*n + (j+1)] == 'X'){    
         neighbors[i*n + j] = (int)(neighbors[i*n + j]-'0') + (int)(add-'0');
         neighbors[i*n + j] = neighbors[i*n + j] +'0';
       }  
     }
   }
 
-//check SE
+  //check SW
+  for(int i = 0; i<m-1; i++){
+    for(int j = 1; j<n; j++){
+      if (board[(i+1)*n + (j-1)] == 'X'){    
+        neighbors[i*n + j] = (int)(neighbors[i*n + j]-'0') + (int)(add-'0');
+        neighbors[i*n + j] = neighbors[i*n + j] +'0';
+      }  
+    }
+  }
+
+  //check SE
   for(int i = 0; i<m-1; i++){
     for(int j = 0; j<n-1; j++){
-      if (board[(i*n +1) + (j+1)] == 'X'){    
+      if (board[(i+1)*n + (j+1)] == 'X'){    
         neighbors[i*n + j] = (int)(neighbors[i*n + j]-'0') + (int)(add-'0');
         neighbors[i*n + j] = neighbors[i*n + j] +'0';
       }  
     }
   }
 
-//check bombs
- for(int i = 0; i<m; i++){
+  //check bombs
+  for(int i = 0; i<m; i++){
     for(int j = 0; j<n; j++){
       if (board[i*n + j] == 'X'){    
         neighbors[i*n + j] = 'X'; 
       }  
    }
  }
-  
+ 
   printf("\nNeighbors:\n");
 
   for(int i = 0; i<m; i++){
@@ -138,7 +140,5 @@ char add = '1';
 
   free(board);
   free(neighbors);
-
+  
 }
-
-
