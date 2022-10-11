@@ -14,6 +14,7 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
   FILE* fp = fopen(filename, "rb");
   char str[100];
   char check[2];
+
   
   if(fp == NULL) {
       perror("Error opening file");
@@ -36,7 +37,10 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
       fscanf(fp, " %hhu %hhu %hhu", &arr[i*(*h)+j].red, &arr[i*(*h)+j].green, &arr[i*(*h)+j].blue);
     }
   }
+
+
   fclose(fp);
   return(arr);
+  free(arr);
 }
 
