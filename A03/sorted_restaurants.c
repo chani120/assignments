@@ -24,6 +24,27 @@ struct node* insert_front(struct restaurants res_list, struct node* head){
     return n;
 };
 
+struct node* insert_middle(struct restaurants res_list, struct node* head){
+    struct node* m = malloc(sizeof(struct node));
+    m-> res_list=res_list;
+    m->next=NULL;
+    struct node* temp = head;
+    while(temp->next != NULL) { 
+        if (temp->next->res_list.rating < m->res_list.rating) {
+           m->next=temp->next;// insert new node between temp and temp->next
+           temp->next=m;
+           break;
+        }
+        temp=temp->next;
+    }
+    if (temp->next == NULL) {
+        temp->next=m;
+        m->next=NULL;
+       // new node add at end
+    }
+    return m;
+}
+
 void print(struct node*list)
 {
    for(struct node* n = list; n!=NULL; n=n->next){
@@ -31,7 +52,6 @@ void print(struct node*list)
     n->res_list.name, n->res_list.opening_hour, n->res_list.closing_hour, n->res_list.rating);
    }
 }
-
 
 
 int main(){
@@ -53,31 +73,17 @@ int main(){
     scanf("%d",&data[i].closing_hour);
     }
     
-    float arr[20];
- 
-    for(int i=0; i < num_res; i++){
-        arr[i]= data[i].rating;
-    }
-    
-    int temp = 0;
-    for(int i=0; i < num_res; i++){
-        for(int j = i+1; j < num_res; j++){
-            if (arr[i] > arr[j]){
-                temp = arr[i];       
-                arr[i] = arr[j];     
-                arr[j] = temp;
-            }    
-        }   
-    }
-    
-    for(int i=0; i < num_res; i++){
-        for(int j= 0; j < num_res; j++){
-            if(arr[i]==data[j].rating){
-            head = insert_front(data[j],head);
-            }
+
+    head = insert_front(data[0], head);
+    for(int i=1; i<num_res; i++){
+        if (data[i].rating < head->res_list.rating) { 
+            insert_middle(data[i],head);
+        }
+        else{
+        head=insert_front(data[i],head);
         }
     }
-
+ 
 
     print(head);
     struct node* current;//from sep 13 slides
