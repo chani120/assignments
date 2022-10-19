@@ -8,93 +8,89 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-
-  FILE* fp = fopen(argv[1], "rb");
-  int width, height; 
-  char str[100];
- 
-  fgets(str, 100, fp);
-  sscanf(str, "%d %d", width,height);
-    // allocate place for array[width][length][3]
-    int a, b;
-    int array;
-    array = malloc(width*sizeof(int*));
-    for(a = 0; a < width; a++){
-        array[a] = malloc(height*sizeof(int *));
-        for(b = 0; b < height; b++){
-            array[a][b] = malloc(3*sizeof(int));
-        }
-    }
+  //FILE* fp = fopen(argv[1], "rb");
+   
+  /*char str[100];
   
- 
-    for (int y = 0; y < height;y++){ 
-        for(int x=0; x < width; x++){
-            array[x][y][0] = fgetc(argv[1]); //red
-            array[x][y][1] = fgetc(argv[1]); //green
-            array[x][y][2] = fgetc(argv[1]); //blue
-}}
+  fgets(str,100, fp);
+  printf("%s",str);
+  fgets(str, 100, fp);
+  printf("%s",str);
+  fgets(str, 100, fp);
+  sscanf(str, "%d %d",w,h);
+  printf("%d %d",*w,*h);
+  fgets(str, 100, fp);
+  printf("%s",str); 
+  */
 
-char outputFile[100];
-FILE *output = fopen(outputFile, "w"); 
+  //struct ppm_pixel* arr = malloc(sizeof(struct ppm_pixel)*(*w)*(*h));
 
-char c;
-int I;
+  //fread(arr, sizeof(struct ppm_pixel),(*w)*(*h), fp);
+  int w;
+  int h;
+  struct ppm_pixel* image = read_ppm(argv[1], &w,&h);
 
-for (int y = 0; y < height;y++){ 
-  for(int x=0; x < width; x++){
-    I = (array[x][y][0] + array[x][y][1] + array[x][y][2])/3;
+  int I;
+  char c;
+
+  for(int i = 0; i < h; i++){
+    for(int j = 0; j < w; j++){
+    I = ((image[i*(w)+j].red) + (image[i*(w)+j].green) + (image[i*(w)+j].blue))/3;
+
     if(I >= 0 && I <= 25){
-      char c = '@';
-      fprintf(output,"%c ",c);
+      c = '@';
+      printf("%c ",c);
     }     
 
     else if(I >= 26 && I <= 50){
-      char c = '#';
-      fprintf(output,"%c ",c);
+      c = '#';
+      printf("%c ",c);
     }
 
     else if(I >= 51 && I <= 75){
-      char c = '%';
-      fprintf(output,"%c ",c);
+      c = '%';
+      printf("%c ",c);
     }
 
     else if(I >= 76 && I <= 10){
-      char c = '*';
-      fprintf(output,"%c ",c);
+      c = '*';
+      printf("%c ",c);
     }
 
     else if(I >= 101 && I <= 125){
-      char c = 'o';
-      fprintf(output,"%c ",c);
+      c = 'o';
+      printf("%c ",c);
     }
 
     else if(I >= 126 && I <= 150){
-      char c = ';';
-      fprintf(output,"%c ",c);
+      c = ';';
+      printf("%c ",c);
     }
 
     else if(I >= 151 && I <= 175){
-      char c = ':';
-      fprintf(output,"%c ",c);
+      c = ':';
+      printf("%c ",c);
     }
 
     else if(I >= 176 && I <= 200){
-      char c = ',';
-      fprintf(output,"%c ",c);
+      c = ',';
+      printf("%c ",c);
     }
 
     else if(I >= 201 && I <= 225){
-      char c = '.';
-      fprintf(output,"%c ",c);
+      c = '.';
+      printf("%c ",c);
     }
 
     else if(I >= 226 && I <= 255){
-      char c = ' ';
-      fprintf(output,"%c ",c);
+      c = ' ';
+      printf("%c ",c);
     }
-
-  free(array);
-  fclose(output);
-  return 0;
+    
+  }
+  printf("\n");
 }
 
+  //free(arr);
+  return 0;
+}
