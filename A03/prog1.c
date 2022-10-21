@@ -26,7 +26,7 @@ int findAndReturnMax(int *array1, int len, int max) {
         if (max < array1[i]) 
             max = array1[i];
         }
-    }
+    
     return 0;
 }
 
