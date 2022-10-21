@@ -31,15 +31,11 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
   fgets(str, 100, fp);
   printf("%s",str);
 
- struct ppm_pixel* arr = malloc(sizeof(struct ppm_pixel)*(*w)*(*h));
-  //for(int i = 0; 1 <*h; i++){
-  //  for(int j = 0; 1 <*w; j++){
-   //   fscanf(fp, " %hhu %hhu %hhu", &arr[i*(*h)+j].red, &arr[i*(*h)+j].green, &arr[i*(*h)+j].blue);
-   // }
- // }
- fread(arr, sizeof(struct ppm_pixel),(*w)*(*h), fp);
+  struct ppm_pixel* arr = malloc(sizeof(struct ppm_pixel)*(*w)*(*h));
+
+  fread(arr, sizeof(struct ppm_pixel),(*w)*(*h), fp);
   fclose(fp);
   return(arr);
-  //free(arr);
+  free(arr);
 }
 

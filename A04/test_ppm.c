@@ -12,7 +12,7 @@ int main() {
       printf("( %hhu %hhu %hhu )", image[i*(w)+j].red, image[i*(w)+j].green, image[i*(w)+j].blue);
    }
    printf("\n");
-  }
+  } 
 
 
   free(image);
