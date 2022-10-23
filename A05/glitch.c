@@ -20,11 +20,9 @@ int main(int argc, char** argv) {
    } 
   } 
  
- //FILE *fp
- //fp = fopen(<argv[1]>"glitch.ppm","wb")
- 
   char* new_file = malloc(strlen(argv[1])+10);
   strcpy(new_file,argv[1]);
+  new_file[strlen(new_file)-4] = '\0';
   strcat(new_file,"-glitch.ppm");
 
   write_ppm(new_file, pixels, w, h);
