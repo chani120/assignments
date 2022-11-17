@@ -20,10 +20,11 @@ int main(int argc, char** argv) {
   }
 
   int w, h;
-  int index = 0;
-  int binary[1000];
-  
   struct ppm_pixel* pixels = read_ppm(argv[1],&w,&h);
+  int index = 0;
+  int* binary = (int*)malloc(3*(w)*(h)*(sizeof(int)));
+  
+  
 
   for(int i = 0; i < h; i++){
     for(int j = 0; j < w; j++){
@@ -36,9 +37,9 @@ int main(int argc, char** argv) {
     }
   }
   
-  for(int x = 0; x < index; x++){
-      printf("%d",binary[x]);
-  }
+ //for(int x = 0; x < index; x++){
+    //  printf("%d",binary[x]);
+ // }
 
 int decarr[8];
 printf("\n");
