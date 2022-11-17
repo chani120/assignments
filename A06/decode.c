@@ -12,7 +12,6 @@ printf("%c",(char)(value));
 return value;
 }
 
-
 int main(int argc, char** argv) {
   if (argc != 2) {
     printf("usage: decode <file.ppm>\n");
@@ -23,8 +22,6 @@ int main(int argc, char** argv) {
   struct ppm_pixel* pixels = read_ppm(argv[1],&w,&h);
   int index = 0;
   int* binary = (int*)malloc(3*(w)*(h)*(sizeof(int)));
-  
-  
 
   for(int i = 0; i < h; i++){
     for(int j = 0; j < w; j++){
@@ -36,12 +33,9 @@ int main(int argc, char** argv) {
       index = index +1;
     }
   }
-  
- //for(int x = 0; x < index; x++){
-    //  printf("%d",binary[x]);
- // }
 
 int decarr[8];
+int val;
 printf("\n");
 
 for (int x = 0; x < index; x += 8){
@@ -53,8 +47,11 @@ for (int x = 0; x < index; x += 8){
   decarr[5] = binary[x+5];
   decarr[6] = binary[x+6];
   decarr[7] = binary[x+7];
-  dec(decarr);
-  }
+  val = dec(decarr);
+  if((char)(val) == '\0'){
+  break;
+  }  
+ }
 
   free(pixels);
   return 0;
