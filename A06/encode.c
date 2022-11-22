@@ -4,26 +4,26 @@
 #include "read_ppm.h"
 #include "write_ppm.h"
 
-int* bin(char* arr, int width, int height){
-  int* binary = (int*)malloc(8*sizeof(arr)*width*height);
-  int num =0;
-  for (int i = 0; i < 8*(sizeof(arr)); i+=8){
-    num = arr[i/8];
-    binary[i+7] = num%2;
-    num = num/2;
-    binary[i+6] = num%2;
-    num = num/2;
-    binary[i+5] = num%2;
-    num = num/2;
-    binary[i+4] = num%2;
-    num = num/2;
-    binary[i+3] = num%2;
-    num = num/2;
-    binary[i+2] = num%2;
-    num = num/2;
-    binary[i+1] = num%2;
-    num = num/2;
-    binary[i] = num%2;
+int* bin(char* arr, int max){
+  int* binary = (int*)malloc(8*sizeof(int)*max);
+  int x;
+  for (int i = 0; i < (8*max); i+=8){
+    x = arr[i/8];
+    binary[i+7] = x%2;
+    x = x/2;
+    binary[i+6] = x%2;
+    x = x/2;
+    binary[i+5] = x%2;
+    x = x/2;
+    binary[i+4] = x%2;
+    x = x/2;
+    binary[i+3] = x%2;
+    x = x/2;
+    binary[i+2] = x%2;
+    x = x/2;
+    binary[i+1] = x%2;
+    x = x/2;
+    binary[i] = x%2;
   }
 return binary;
 }
@@ -39,18 +39,17 @@ int main(int argc, char** argv) {
   struct ppm_pixel* pixels = read_ppm(argv[1],&w,&h);
 
   int max = (3*w*h)/8;
-  char * message = (char*)malloc(max*sizeof(char*));
+  char * message = (char*)malloc(max*sizeof(char));
   printf("Please enter a secret message: ");
   scanf("%s", message);
-  
-  //int * array = (int*)malloc(message*(sizeof(int*))*w*h)
-  
-  int *num = bin(message, w, h);
+
+  int* num = bin(message,max);
   
   int y = 0;
+  while(y < (8*max)){
    for(int i = 0; i < h; i++){
     for(int j = 0; j < w; j++){
-      pixels[i*(w)+j].red = (pixels[i*(w)+j].red & 0b11111110) | num[y] ;
+      pixels[i*(w)+j].red = (pixels[i*(w)+j].red & 0b11111110) | num[y];
       y = y +1;
       pixels[i*(w)+j].green = (pixels[i*(w)+j].green & 0b11111110) | num[y];
       y = y +1;
@@ -58,7 +57,7 @@ int main(int argc, char** argv) {
       y = y +1;
     }
   }
-  
+  }
   char* new_file = malloc(strlen(argv[1])+8);
   strcpy(new_file,argv[1]);
   new_file[strlen(new_file)-4] = '\0';
