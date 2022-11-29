@@ -35,7 +35,7 @@ void memstats(struct chunk* freelist, void* buffer[], int len) {
   for(int i =0; i<len; i++){
     if(buffer[i] != NULL){
       usedB++;
-      struct chunk *cnk = (struct chunk *)((strunk chunk *)buffer[i]-1);
+      struct chunk *cnk = (struct chunk *)((struct chunk *)buffer[i]-1);
       usedM = usedM + cnk -> size;
       unused = (cnk->size - cnk->used) + unused;
     }
@@ -45,7 +45,7 @@ void memstats(struct chunk* freelist, void* buffer[], int len) {
   float unUtil = (float)unused/usedM;
   totB = freeB + usedB;
 
-  printf("Total blocks: %d Free blocks: %d Used blocks: %d \nTotal memory allocated: %d Free memory: %d Used memory: %d \nUnderutilized memory: %.2f \n", totB, freeB, usedB, totM, freeM, usedM, unUtil)
+  printf("Total blocks: %d Free blocks: %d Used blocks: %d \nTotal memory allocated: %d Free memory: %d Used memory: %d \nUnderutilized memory: %.2f \n", totB, freeB, usedB, totM, freeM, usedM, unUtil);
 }
 
 int main ( int argc, char* argv[]) {
