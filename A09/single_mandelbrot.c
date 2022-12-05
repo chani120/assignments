@@ -8,26 +8,26 @@
 
 int main(int argc, char* argv[]) {
   int size = 480;
-  float xmin = -2.0;
-  float xmax = 0.47;
-  float ymin = -1.12;
-  float ymax = 1.12;
+  float x_min = -2.0;
+  float x_max = 0.47;
+  float y_min = -1.12;
+  float y_max = 1.12;
   int maxIterations = 1000;
 
   int opt;
   while ((opt = getopt(argc, argv, ":s:l:r:t:b:")) != -1) {
     switch (opt) {
       case 's': size = atoi(optarg); break;
-      case 'l': xmin = atof(optarg); break;
-      case 'r': xmax = atof(optarg); break;
-      case 't': ymax = atof(optarg); break;
-      case 'b': ymin = atof(optarg); break;
-      case '?': printf("usage: %s -s <size> -l <xmin> -r <xmax> -b <ymin> -t <ymax>\n", argv[0]); break;
+      case 'l': x_min = atof(optarg); break;
+      case 'r': x_max = atof(optarg); break;
+      case 't': y_max = atof(optarg); break;
+      case 'b': y_min = atof(optarg); break;
+      case '?': printf("usage: %s -s <size> -l <x_min> -r <x_max> -b <y_min> -t <y_max>\n", argv[0]); break;
     }
   }
   printf("Generating mandelbrot with size %dx%d\n", size, size);
-  printf("  X range = [%.4f,%.4f]\n", xmin, xmax);
-  printf("  Y range = [%.4f,%.4f]\n", ymin, ymax);
+  printf("  X range = [%.4f,%.4f]\n", x_min, x_max);
+  printf("  Y range = [%.4f,%.4f]\n", y_min, y_max);
 
   // todo: your work here
   // generate pallet
@@ -56,22 +56,22 @@ struct timeval tstart, tend;
 //generate mandlebrot
 for(int i= 0; i<size; i++){
   for(int j=0; j<size; j++){
-    float xfrac = (float) (i/size);
-    float yfrac = (float) (j/size);
-    float x0 = xmin + xfrac * (xmax - xmin);
-    float y0 = ymin + yfrac * (ymax - ymin);
+    float x_var = (float) (i/size);
+    float y_var = (float) (j/size);
+    float x0 = x_min + x_var * (x_max - x_min);
+    float y0 = y_min + y_var * (y_max - y_min);
   
     float x = 0.0;
     float y = 0.0;
-    int iter = 0;
-    while (iter < maxIterations && x*x + y*y < 2*2){
-      float xtmp = x*x - y*y + x0;
+    int count = 0;
+    while (count < maxIterations && x*x + y*y < 2*2){
+      float temp_x = x*x - y*y + x0;
       y = 2*x*y + y0;
-      x = xtmp;
-      iter++;
+      x = temp_x;
+      count++;
     }
-    if(iter < maxIterations){
-      pixels[i * size + j] = palette[iter];
+    if(count < maxIterations){
+      pixels[i * size + j] = palette[count];
     }
     else{
       pixels[i * size + j].red = 0;
